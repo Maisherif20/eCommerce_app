@@ -151,8 +151,8 @@ class _ProductItemWidgetState extends State<ProductItemWidget> {
                                     toastLength: Toast.LENGTH_LONG,
                                     gravity: ToastGravity.CENTER,
                                     timeInSecForIosWeb: 3,
-                                    backgroundColor: Colors.white,
-                                    textColor: Colors.green,
+                                    backgroundColor: Colors.green,
+                                    textColor: Colors.white,
                                     fontSize: 20.0);
                               }
                               if (state is AddToCartErrorState) {

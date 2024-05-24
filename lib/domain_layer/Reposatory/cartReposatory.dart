@@ -6,4 +6,5 @@ import 'package:ecommerce/domain_layer/Entities/getCartResponseEntity/GetCartRes
 abstract class CartReposatory{
   Future<Either<CartResponseEntity , String>>addToCart(String productId);
   Future<Either<GetCartResponseEntity , String>>getCart();
+  Future<Either<GetCartResponseEntity , String>>deleteProductFromCart({required String productId});
 }

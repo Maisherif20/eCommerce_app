@@ -195,13 +195,13 @@ class ApiManager {
     GetCartResponse getCartResponse = GetCartResponse.fromJson(json);
     return getCartResponse;
   }
-  Future<CartResponse> deleteFromCart(String productId) async {
+  Future<GetCartResponse> deleteFromCart(String productId) async {
     var url = Uri.https(
         baseUrl, "/api/v1/cart/$productId");
     var response =
     await http.delete(url,headers: {"token": PrefsHelper.getToken()});
     var json = jsonDecode(response.body);
-    CartResponse cartResponse = CartResponse.fromJson(json);
-    return cartResponse;
+    GetCartResponse getCartResponse = GetCartResponse.fromJson(json);
+    return getCartResponse;
   }
 }

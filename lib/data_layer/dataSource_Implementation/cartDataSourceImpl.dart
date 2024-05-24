@@ -36,4 +36,18 @@ class CartDataSourceImpl extends CartDataSource{
       return Right(error.toString()); // error from server
     }
   }
+
+  @override
+  Future<Either<GetCartResponse, String>> deleteProductFromCart({required String productId}) async{
+    try {
+      var response = await apiManager.deleteFromCart(productId);
+      if (response.statusMsg != null) {
+        return Right(response.message!);
+      } else {
+        return Left(response);
+      }
+    } catch (error) {
+      return Right(error.toString()); // error from server
+    }
+  }
 }

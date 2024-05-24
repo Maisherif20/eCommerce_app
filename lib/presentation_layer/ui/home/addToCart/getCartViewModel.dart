@@ -1,4 +1,5 @@
 import 'package:ecommerce/domain_layer/Entities/getCartResponseEntity/GetCartResponseEntity.dart';
+import 'package:ecommerce/domain_layer/Use%20case/deleteProductFromCart.dart';
 import 'package:ecommerce/domain_layer/Use%20case/getCartUseCase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -6,13 +7,14 @@ import 'package:injectable/injectable.dart';
 @injectable
 class CartViewModel extends Cubit<CartStates> {
   @factoryMethod
-  CartViewModel({required this.getCartUseCase}) : super(CartInitialState());
+  CartViewModel({required this.getCartUseCase , required this.deleteProductFromCartUseCase}) : super(CartInitialState());
   GetCartUseCase getCartUseCase;
+  DeleteProductFromCartUseCase deleteProductFromCartUseCase;
   getCart() async {
     emit(CartLoadingState());
     try {
-      var addressData = await getCartUseCase.invoke();
-      addressData.fold((response) {
+      var result = await getCartUseCase.invoke();
+      result.fold((response) {
         emit(CartSuccessState(getCartResponseEntity: response));
       }, (error) {
         emit(CartErrorState(errorMessage: error));
@@ -21,19 +23,7 @@ class CartViewModel extends Cubit<CartStates> {
       emit(CartErrorState(errorMessage: e.toString()));
     }
   }
-  // deleteProductUserCase(String productId) async {
-  //   emit(WishListLoadingState());
-  //   try {
-  //     var addressData = await deleteProductUseCase.invoke(productId);
-  //     addressData.fold((response) {
-  //       emit(WishListSuccessState(productEntity: response));
-  //     }, (error) {
-  //       emit(WishListErrorState(errorMessage: error));
-  //     });
-  //   } catch (e) {
-  //     emit(WishListErrorState(errorMessage: e.toString()));
-  //   }
-  // }
+
 }
 
 class CartStates {}
@@ -44,7 +34,6 @@ class CartLoadingState extends CartStates {}
 
 class CartSuccessState extends CartStates {
   GetCartResponseEntity getCartResponseEntity;
-
   CartSuccessState({required this.getCartResponseEntity});
 }
 

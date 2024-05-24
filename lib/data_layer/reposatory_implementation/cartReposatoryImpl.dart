@@ -29,4 +29,14 @@ class CartReposatoryImpl extends CartReposatory {
       return right(error);
     });
   }
+
+  @override
+  Future<Either<GetCartResponseEntity, String>> deleteProductFromCart({required String productId}) async{
+    var result = await cartDataSource.deleteProductFromCart(productId: productId);
+    return result.fold((response) {
+      return left(response.toGetCartResponseEntity());
+    }, (error) {
+      return right(error);
+    });
+  }
 }

@@ -25,6 +25,19 @@ class AddToCartViewModel extends Cubit<AddToCartState> {
      }
 
   }
+// deleteProductFromCartUserCase(String productId) async {
+//   emit(CartLoadingState());
+//   try {
+//     var addressData = await deleteProductFromCartUseCase.invoke(productId);
+//     addressData.fold((response) {
+//       emit(CartSuccessState(: response));
+//     }, (error) {
+//       emit(CartErrorState(errorMessage: error));
+//     });
+//   } catch (e) {
+//     emit(CartErrorState(errorMessage: e.toString()));
+//   }
+// }
 }
 
 sealed class AddToCartState {}
